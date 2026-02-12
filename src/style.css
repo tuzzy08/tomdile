@@ -1,0 +1,105 @@
+@import url("https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Inter:wght@300;400;600&display=swap");
+
+:root {
+  --color-bg: #050508;
+  --color-surface: rgba(255, 255, 255, 0.05);
+  --color-primary: #3b82f6;
+  --color-accent: #06b6d4;
+  --color-neon: #00f3ff;
+  --color-text: #f0f0f0;
+  --color-text-dim: #94a3b8;
+
+  --font-heading: "Unbounded", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  --gradient-main: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+  --glow-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: var(--font-heading);
+  transition: all 0.3s ease;
+}
+
+/* Utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section-padding {
+  padding: 80px 0;
+}
+
+/* Scroll Animations */
+section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease-out;
+  will-change: opacity, transform;
+}
+
+section.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered children animations for specific sections if needed */
+.stagger-child {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
+}
+
+section.active .stagger-child {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  section,
+  .stagger-child {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
