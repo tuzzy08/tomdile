@@ -2,92 +2,114 @@ import { Translation } from './types';
 
 export const de: Translation = {
   navbar: {
-    home: 'Startseite',
-    services: 'Leistungen',
-    about: 'Über uns',
-    contact: 'Kontakt',
+    capabilities: 'Kompetenzen',
+    work: 'Projekte',
+    company: 'Unternehmen',
+    contact: 'Projekt starten',
+    menu: 'Menü öffnen',
+    close: 'Menü schließen',
   },
   hero: {
-    title: {
-      modernize: 'Modernisieren.',
-      secure: 'Sichern.',
-      automate: 'Automatisieren.',
-    },
-    subtitle: 'Ihr vertrauenswürdiger Partner für <strong>IT-Infrastruktur</strong>, <strong>Cybersicherheit</strong> und <strong>KI-Lösungen</strong>. Wir helfen Unternehmen, effizient zu arbeiten und sicher zu skalieren.',
-    ctaPrimary: 'Transformation starten',
-    ctaSecondary: 'Leistungen erkunden',
+    eyebrow: 'Intelligente Systeme, entwickelt für Vertrauen',
+    title: ['Wir bauen', 'Intelligenz', 'der Sie vertrauen'],
+    subtitle: 'KI-Agenten. Sichere Systeme. Finanzprodukte.',
+    ctaPrimary: 'Projekt starten',
+    ctaSecondary: 'Kompetenzen entdecken',
+    status: ['Agenten online', 'Freigaben', 'Bedrohungen blockiert', 'Transaktionen', 'Systemstatus'],
   },
-  services: {
-    title: 'Unsere Kompetenz',
-    infrastructure: {
-      title: 'IT-Infrastruktur',
-      description: 'Design, Implementierung und Management für operative Kontinuität und Skalierbarkeit.',
-      items: [
-        'Hardware & Rechenzentren',
-        'Cloud & Virtualisierung',
-        'Netzwerkoptimierung',
-        'Proaktive Überwachung'
-      ]
-    },
-    cybersecurity: {
-      title: 'Cybersicherheit',
-      description: 'Risikobewertung, Beratung und Schutz geschäftskritischer Systeme.',
-      items: [
-        'Bedrohungserkennung',
-        'Identitätsmanagement',
-        'Verschlüsselung & Firewalls',
-        'Regulatorische Compliance'
-      ]
-    },
-    ai: {
-      title: 'Künstliche Intelligenz',
-      description: 'Datenwert erschließen und Entscheidungen mit verantwortungsvollen KI-Strategien automatisieren.',
-      items: [
-        'Prozessautomatisierung',
-        'KI-Kundensupport',
-        'Prädiktive Analysen',
-        'AIOps-Management'
-      ]
-    }
+  capabilities: {
+    kicker: 'Kompetenzen / 01—03',
+    title: 'Ein Partner. Drei Systeme.',
+    items: [
+      {
+        title: 'Agentische KI',
+        description: 'KI-Agenten, die reale Arbeit planen, koordinieren und ausführen—mit menschlicher Kontrolle, wo sie zählt.',
+        features: ['KI-Agenten', 'Multi-Agent-Orchestrierung', 'Voice Agents', 'Chatbots & Workflows'],
+      },
+      {
+        title: 'Security Engineering',
+        description: 'Sicherheit in jeder Schicht—von Cloud und Anwendungen bis zu Identitäten und Netzwerken.',
+        features: ['Cloud Security', 'Web- & Anwendungssicherheit', 'Netzwerkabwehr', 'Identity & Access'],
+      },
+      {
+        title: 'Finanzprodukte',
+        description: 'Zahlungs- und Remittance-Produkte, die Geld sicher zwischen Kunden, Partnern und Märkten bewegen.',
+        features: ['Payments', 'Grenzüberschreitende Remittance', 'Wallets', 'Compliance-Workflows'],
+      },
+    ],
   },
-  about: {
-    badge: 'Über Tomdile',
-    title: 'Ihr <span class="gradient-text">Vertrauenswürdiger Berater</span> im digitalen Zeitalter.',
-    lead: 'Wir reparieren nicht nur Computer; wir entwickeln <strong>Resilienz</strong> und <strong>Wachstum</strong>.',
-    description: 'Seit über einem Jahrzehnt ist Tomdile der stille Motor hinter erfolgreichen kleinen und mittleren Unternehmen. Wir schließen die Lücke zwischen komplexer Unternehmenstechnologie und praktischen Geschäftsanforderungen, damit Sie sicher, effizient und der Konkurrenz voraus bleiben.',
-    values: {
-      integrity: {
-        title: 'Integrität',
-        desc: 'Transparente Beratung. Keine versteckten Kosten.'
-      },
-      passion: {
-        title: 'Leidenschaft',
-        desc: 'Unermüdliches Streben nach Exzellenz.'
-      },
-      partnership: {
-        title: 'Partnerschaft',
-        desc: 'Ihr Erfolg ist unser Maßstab.'
-      }
-    },
-    stats: {
-      experience: 'Jahre Erfahrung',
-      support: 'Proaktiver Support',
-      clients: 'Kundenfokus'
-    }
+  process: {
+    kicker: 'Betriebsmodell / 01—05',
+    title: 'Von der Absicht zum verifizierten Ergebnis.',
+    description: 'Jedes System verbindet Kontext, Entscheidungen, Kontrollen und Aktionen in einem beobachtbaren Kreislauf.',
+    marquee: ['Erkennen', 'Planen', 'Koordinieren', 'Handeln', 'Prüfen'],
+    steps: [
+      { title: 'Erkennen', description: 'Signale aus Kundenkontakten, Teams, Systemen und Märkten erfassen.' },
+      { title: 'Planen', description: 'Absicht, Grenzen und den sichersten Weg zum Ergebnis modellieren.' },
+      { title: 'Koordinieren', description: 'Arbeit auf spezialisierte Agenten, Tools und Dienste verteilen.' },
+      { title: 'Handeln', description: 'Mit Freigaben, Leitplanken und klarer Verantwortung ausführen.' },
+      { title: 'Prüfen', description: 'Ergebnisse bewerten, Audit-Trails sichern und kontinuierlich lernen.' },
+    ],
+  },
+  useCases: {
+    kicker: 'Use Cases / Angewandte Systeme',
+    title: 'Wo intelligente Systeme Wirkung erzeugen.',
+    items: [
+      { title: 'Agenten für Kundenprozesse', description: 'Anfragen lösen, Systeme aktualisieren und Ausnahmen mit vollständigem Kontext eskalieren.' },
+      { title: 'Voice Support & Sales', description: 'Natürliche Voice Agents, die Gespräche in Echtzeit qualifizieren, unterstützen und weiterleiten.' },
+      { title: 'Security Operations', description: 'Signale korrelieren, Vorfälle untersuchen und kontrollierte Reaktionen koordinieren.' },
+      { title: 'Cloud- & Anwendungshärtung', description: 'Risiken in Infrastruktur, Anwendungen, Identitäten und Netzwerken reduzieren.' },
+      { title: 'Payments & Wallets', description: 'Zuverlässige Zahlungsflüsse, Ledger-Erlebnisse und operative Kontrollen entwickeln.' },
+      { title: 'Grenzüberschreitende Remittance', description: 'Konforme und transparente Geldbewegungen über Märkte und Zahlungswege gestalten.' },
+    ],
+  },
+  proof: {
+    kicker: 'Produktionsstandard',
+    title: 'Für den Betrieb gebaut, nicht für die Demo.',
+    description: 'Automatisierung schafft nur dann Wert, wenn Teams sie verstehen, kontrollieren und unter realem Druck einsetzen können.',
+    points: [
+      { title: 'Menschliche Freigaben', description: 'Folgenreiche Aktionen pausieren für die richtige Person im richtigen Moment.' },
+      { title: 'Standardmäßig beobachtbar', description: 'Entscheidungen, Tool-Aufrufe, Ergebnisse und Ausnahmen lückenlos nachverfolgen.' },
+      { title: 'Security by Design', description: 'Minimale Rechte, geschützte Datenpfade und explizite Kontrollgrenzen.' },
+      { title: 'Resilienter Betrieb', description: 'Robuste Fallbacks, klare Fehlerzustände und eindeutige Verantwortung.' },
+    ],
+  },
+  delivery: {
+    kicker: 'Zusammenarbeitsmodell',
+    title: 'Wie wir liefern.',
+    steps: [
+      { title: 'Entdecken', description: 'Ziele, Systeme, Risiken und Rahmenbedingungen verstehen.' },
+      { title: 'Entwerfen', description: 'System, Agenten, Kontrollen und Experience konzipieren.' },
+      { title: 'Einführen', description: 'Produktivlösung bauen, integrieren, testen und absichern.' },
+      { title: 'Betreiben', description: 'System betreiben, beobachten und kontinuierlich verbessern.' },
+    ],
   },
   contact: {
-    title: 'Gespräch beginnen',
-    subtitle: 'Bereit, Ihr Unternehmen zu modernisieren? Lassen Sie uns reden.',
+    kicker: 'Projekt starten',
+    title: 'Was sollte Ihr Unternehmen als Nächstes automatisch erledigen?',
+    subtitle: 'Lassen Sie uns das intelligente System entwickeln, das Ihr Unternehmen voranbringt.',
+    cta: 'System entwerfen',
+    secondaryCta: 'Kontakt aufnehmen',
     form: {
       name: 'Name',
-      email: 'E-Mail-Adresse',
-      message: 'Wie können wir Ihnen helfen?',
-      submit: 'Nachricht senden'
+      email: 'Geschäftliche E-Mail',
+      message: 'Was möchten Sie bauen?',
+      submit: 'Briefing senden',
+      sending: 'Wird gesendet…',
+      success: 'Ihr Briefing wurde gesendet. Wir melden uns.',
+      error: 'Das Briefing konnte nicht gesendet werden. Schreiben Sie an contact@tomdile.com.',
     },
-    emailLabel: 'E-Mail'
   },
   footer: {
-    slogan: 'Moderne IT-Beratung für die Zukunft.',
-    rights: 'Tomdile. Alle Rechte vorbehalten.'
-  }
+    slogan: 'Intelligente Systeme. Sicher konzipiert.',
+    capabilities: 'Kompetenzen',
+    company: 'Unternehmen',
+    connect: 'Kontakt',
+    capabilityLinks: ['Agentische KI', 'Security Engineering', 'Finanzprodukte'],
+    companyLinks: ['Projekte', 'Über uns', 'Kontakt'],
+    status: 'Systemstatus — betriebsbereit',
+    privacy: 'Datenschutz',
+    terms: 'Impressum',
+    rights: 'Tomdile. Alle Rechte vorbehalten.',
+  },
 };

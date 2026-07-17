@@ -1,67 +1,78 @@
 export interface Translation {
   navbar: {
-    home: string;
-    services: string;
-    about: string;
+    capabilities: string;
+    work: string;
+    company: string;
     contact: string;
+    menu: string;
+    close: string;
   };
   hero: {
-    title: {
-      modernize: string;
-      secure: string;
-      automate: string;
-    };
+    eyebrow: string;
+    title: string[];
     subtitle: string;
     ctaPrimary: string;
     ctaSecondary: string;
+    status: string[];
   };
-  services: {
+  capabilities: {
+    kicker: string;
     title: string;
-    infrastructure: {
+    items: Array<{
       title: string;
       description: string;
-      items: string[];
-    };
-    cybersecurity: {
-      title: string;
-      description: string;
-      items: string[];
-    };
-    ai: {
-      title: string;
-      description: string;
-      items: string[];
-    };
+      features: string[];
+    }>;
   };
-  about: {
-    badge: string;
-    title: string; // Contains HTML but we'll handle it or split it
-    lead: string; // Contains HTML
+  process: {
+    kicker: string;
+    title: string;
     description: string;
-    values: {
-      integrity: { title: string; desc: string };
-      passion: { title: string; desc: string };
-      partnership: { title: string; desc: string };
-    };
-    stats: {
-      experience: string;
-      support: string;
-      clients: string;
-    };
+    marquee: string[];
+    steps: Array<{ title: string; description: string }>;
+  };
+  useCases: {
+    kicker: string;
+    title: string;
+    items: Array<{ title: string; description: string }>;
+  };
+  proof: {
+    kicker: string;
+    title: string;
+    description: string;
+    points: Array<{ title: string; description: string }>;
+  };
+  delivery: {
+    kicker: string;
+    title: string;
+    steps: Array<{ title: string; description: string }>;
   };
   contact: {
+    kicker: string;
     title: string;
     subtitle: string;
+    cta: string;
+    secondaryCta: string;
     form: {
       name: string;
       email: string;
       message: string;
       submit: string;
+      sending: string;
+      success: string;
+      error: string;
     };
-    emailLabel: string;
   };
   footer: {
     slogan: string;
+    capabilities: string;
+    company: string;
+    connect: string;
+    capabilityLinks: string[];
+    companyLinks: string[];
+    status: string;
+    privacy: string;
+    terms: string;
     rights: string;
   };
 }

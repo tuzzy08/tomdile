@@ -2,92 +2,114 @@ import { Translation } from './types';
 
 export const en: Translation = {
   navbar: {
-    home: 'Home',
-    services: 'Services',
-    about: 'About',
-    contact: 'Contact',
+    capabilities: 'Capabilities',
+    work: 'Work',
+    company: 'Company',
+    contact: 'Start a build',
+    menu: 'Open menu',
+    close: 'Close menu',
   },
   hero: {
-    title: {
-      modernize: 'Modernize.',
-      secure: 'Secure.',
-      automate: 'Automate.',
-    },
-    subtitle: 'Your trusted partner for <strong>IT Infrastructure</strong>, <strong>Cybersecurity</strong>, and <strong>AI Solutions</strong>. We help businesses operate efficiently and scale confidently.',
-    ctaPrimary: 'Start Your Transformation',
-    ctaSecondary: 'Explore Services',
+    eyebrow: 'Intelligent systems, engineered for trust',
+    title: ['We build', 'intelligence', 'you can trust'],
+    subtitle: 'AI agents. Secure systems. Financial products.',
+    ctaPrimary: 'Start a build',
+    ctaSecondary: 'Explore capabilities',
+    status: ['Agents online', 'Approval queue', 'Threats blocked', 'Transactions', 'System status'],
   },
-  services: {
-    title: 'Our Expertise',
-    infrastructure: {
-      title: 'IT Infrastructure',
-      description: 'Design, implement, and manage to ensure operational continuity and scalability.',
-      items: [
-        'Hardware & Data Centers',
-        'Cloud & Virtualization',
-        'Network Optimization',
-        'Proactive Monitoring'
-      ]
-    },
-    cybersecurity: {
-      title: 'Cybersecurity',
-      description: 'Assess risk, advise on controls, and protect business-critical systems.',
-      items: [
-        'Threat Detection',
-        'Identity Management',
-        'Encryption & Firewalls',
-        'Regulatory Compliance'
-      ]
-    },
-    ai: {
-      title: 'Artificial Intelligence',
-      description: 'Unlock data value and automate decisions with responsible AI strategies.',
-      items: [
-        'Process Automation',
-        'AI Customer Support',
-        'Predictive Analytics',
-        'AIOps Management'
-      ]
-    }
+  capabilities: {
+    kicker: 'Capabilities / 01—03',
+    title: 'One partner. Three systems.',
+    items: [
+      {
+        title: 'Agentic AI',
+        description: 'AI agents that plan, coordinate and complete real work—with human oversight where it matters.',
+        features: ['AI agents', 'Multi-agent orchestration', 'Voice agents', 'Chatbots & workflows'],
+      },
+      {
+        title: 'Security engineering',
+        description: 'Security designed into every layer, from cloud foundations and applications to identity and networks.',
+        features: ['Cloud security', 'Web & application security', 'Network defense', 'Identity & access'],
+      },
+      {
+        title: 'Financial products',
+        description: 'Payment and remittance products built to move money safely across customers, partners and borders.',
+        features: ['Payments', 'Cross-border remittance', 'Wallets', 'Compliance workflows'],
+      },
+    ],
   },
-  about: {
-    badge: 'About Tomdile',
-    title: 'Your <span class="gradient-text">Trusted Advisor</span> in the Digital Age.',
-    lead: 'We don\'t just fix computers; we engineer <strong>resilience</strong> and <strong>growth</strong>.',
-    description: 'For over a decade, Tomdile has been the silent engine behind successful small and medium businesses. We bridge the gap between complex enterprise technology and practical business needs, ensuring you stay secure, efficient, and ahead of the curve.',
-    values: {
-      integrity: {
-        title: 'Integrity',
-        desc: 'Transparent advice. No hidden costs.'
-      },
-      passion: {
-        title: 'Passion',
-        desc: 'Relentless pursuit of excellence.'
-      },
-      partnership: {
-        title: 'Partnership',
-        desc: 'Your success is our scorecard.'
-      }
-    },
-    stats: {
-      experience: 'Years Experience',
-      support: 'Proactive Support',
-      clients: 'Client Focus'
-    }
+  process: {
+    kicker: 'Operating model / 01—05',
+    title: 'From intent to verified outcome.',
+    description: 'Every system connects context, decisions, controls and action in one observable loop.',
+    marquee: ['Sense', 'Plan', 'Coordinate', 'Act', 'Verify'],
+    steps: [
+      { title: 'Sense', description: 'Capture signals from customers, teams, systems and markets.' },
+      { title: 'Plan', description: 'Model intent, constraints and the safest path to an outcome.' },
+      { title: 'Coordinate', description: 'Assign work across specialized agents, tools and services.' },
+      { title: 'Act', description: 'Execute with approvals, guardrails and clear ownership.' },
+      { title: 'Verify', description: 'Evaluate the result, preserve an audit trail and improve.' },
+    ],
+  },
+  useCases: {
+    kicker: 'Use cases / Applied systems',
+    title: 'Where intelligent systems create leverage.',
+    items: [
+      { title: 'Customer operations agents', description: 'Resolve requests, update systems and escalate exceptions with full context.' },
+      { title: 'Voice support & sales', description: 'Natural voice agents that qualify, support and route conversations in real time.' },
+      { title: 'Security operations', description: 'Correlate signals, investigate incidents and coordinate a controlled response.' },
+      { title: 'Cloud & application hardening', description: 'Reduce exposure across infrastructure, applications, identities and networks.' },
+      { title: 'Payments & wallets', description: 'Build reliable payment flows, ledger experiences and operational controls.' },
+      { title: 'Cross-border remittance', description: 'Design compliant, transparent money movement across markets and rails.' },
+    ],
+  },
+  proof: {
+    kicker: 'Production standard',
+    title: 'Built for production, not the demo.',
+    description: 'Powerful automation only matters when teams can understand it, control it and trust it under real operating pressure.',
+    points: [
+      { title: 'Human approval gates', description: 'Consequential actions pause for the right person at the right moment.' },
+      { title: 'Observable by default', description: 'Trace decisions, tool calls, outcomes and exceptions end to end.' },
+      { title: 'Security by design', description: 'Least privilege, protected data paths and explicit control boundaries.' },
+      { title: 'Resilient deployment', description: 'Graceful fallbacks, clear failure states and operational ownership.' },
+    ],
+  },
+  delivery: {
+    kicker: 'Engagement model',
+    title: 'How we deliver.',
+    steps: [
+      { title: 'Discover', description: 'Understand goals, systems, risks and constraints.' },
+      { title: 'Design', description: 'Architect the system, agents, controls and experience.' },
+      { title: 'Deploy', description: 'Build, integrate, test and secure the production release.' },
+      { title: 'Operate', description: 'Run, observe and continuously improve the system.' },
+    ],
   },
   contact: {
-    title: 'Start a Conversation',
-    subtitle: 'Ready to modernize your business? Let\'s talk.',
+    kicker: 'Get started',
+    title: 'What should your business do next—automatically?',
+    subtitle: 'Let’s design the intelligent system that moves your business forward.',
+    cta: 'Design a system',
+    secondaryCta: 'Contact us',
     form: {
       name: 'Name',
-      email: 'Email Address',
-      message: 'How can we help you?',
-      submit: 'Send Message'
+      email: 'Work email',
+      message: 'What do you want to build?',
+      submit: 'Send brief',
+      sending: 'Sending…',
+      success: 'Your brief has been sent. We’ll be in touch.',
+      error: 'We could not send your brief. Email contact@tomdile.com instead.',
     },
-    emailLabel: 'Email'
   },
   footer: {
-    slogan: 'Modern IT Consulting for the future.',
-    rights: 'Tomdile. All rights reserved.'
-  }
+    slogan: 'Intelligent systems. Secure by design.',
+    capabilities: 'Capabilities',
+    company: 'Company',
+    connect: 'Connect',
+    capabilityLinks: ['Agentic AI', 'Security engineering', 'Financial products'],
+    companyLinks: ['Work', 'About', 'Contact'],
+    status: 'System status — operational',
+    privacy: 'Privacy',
+    terms: 'Terms',
+    rights: 'Tomdile. All rights reserved.',
+  },
 };

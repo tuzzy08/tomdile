@@ -1,88 +1,80 @@
 import './style.css';
 import { initNavbar, renderNavbar } from './components/navbar';
-import { initHeroStyles, renderHero } from './components/hero';
-import { initServicesStyles, renderServices } from './components/services';
-import { initAboutStyles, renderAbout } from './components/about';
-import { initContactStyles, renderContact } from './components/contact';
-import { initFooterStyles, renderFooter } from './components/footer';
+import { renderHero } from './components/hero';
+import { renderServices } from './components/services';
+import { renderAbout } from './components/about';
+import { renderContact } from './components/contact';
+import { renderFooter } from './components/footer';
 import { I18nService } from './i18n';
+import { EmailService } from './services/email';
 
-// 1. Setup global layout (empty containers)
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <header id="navbar"></header>
-  <main>
-    <section id="hero"></section>
-    <section id="services"></section>
-    <section id="about"></section>
-    <section id="contact"></section>
+  <main id="main-content">
+    <section id="hero" class="hero-section" data-section-root="hero"></section>
+    <div id="services-root"></div>
+    <div id="about-root"></div>
+    <div id="contact-root"></div>
   </main>
   <footer id="footer"></footer>
 `;
 
-// 2. Get Container Elements
-const navbarEl = document.querySelector<HTMLElement>('#navbar')!;
-const heroEl = document.querySelector<HTMLElement>('#hero')!;
-const servicesEl = document.querySelector<HTMLElement>('#services')!;
-const aboutEl = document.querySelector<HTMLElement>('#about')!;
-const contactEl = document.querySelector<HTMLElement>('#contact')!;
-const footerEl = document.querySelector<HTMLElement>('#footer')!;
+const navbarElement = document.querySelector<HTMLElement>('#navbar')!;
+const heroElement = document.querySelector<HTMLElement>('#hero')!;
+const servicesElement = document.querySelector<HTMLElement>('#services-root')!;
+const aboutElement = document.querySelector<HTMLElement>('#about-root')!;
+const contactElement = document.querySelector<HTMLElement>('#contact-root')!;
+const footerElement = document.querySelector<HTMLElement>('#footer')!;
 
-// 3. Initialize Styles (Run once)
-initNavbar(navbarEl);
-initHeroStyles(); // Hero now exports initHeroStyles
-initServicesStyles();
-initAboutStyles();
-initContactStyles();
-initFooterStyles();
-
-// 4. Initialize I18n and Render
-import { EmailService } from './services/email';
-
-const i18n = I18nService.getInstance();
+initNavbar(navbarElement);
 EmailService.init();
 
-i18n.subscribe((lang, t) => {
-  // Update HTML lang attribute
-  document.documentElement.lang = lang;
+let revealObserver: IntersectionObserver | null = null;
+let sectionObserver: IntersectionObserver | null = null;
 
-  // Render components with current translations
-  renderNavbar(navbarEl, t, lang);
-  renderHero(heroEl, t);
-  renderServices(servicesEl, t);
-  renderAbout(aboutEl, t);
-  renderContact(contactEl, t);
-  renderFooter(footerEl, t);
-});
+function initializePageMotion() {
+  revealObserver?.disconnect();
+  sectionObserver?.disconnect();
 
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealElements = document.querySelectorAll<HTMLElement>('.reveal-on-scroll');
 
-// 5. Intersection Observer for scroll animations
-const observerOptions = {
-  root: null,
-  rootMargin: '-50% 0px -50% 0px', // Trigger when section is in the middle of viewport
-  threshold: 0
-};
+  if (reduceMotion) {
+    revealElements.forEach((item) => item.classList.add('is-visible'));
+  } else {
+    revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver?.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+    revealElements.forEach((item) => revealObserver?.observe(item));
+  }
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      // 1. Animate section (keep existing logic)
-      entry.target.classList.add('active');
+  const sections = document.querySelectorAll<HTMLElement>('[data-section-root]');
+  sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const sectionName = (entry.target as HTMLElement).dataset.sectionRoot;
+      document.querySelectorAll<HTMLAnchorElement>('.nav-links a').forEach((link) => {
+        link.classList.toggle('is-active', link.dataset.section === sectionName);
+      });
+    });
+  }, { rootMargin: '-48% 0px -48% 0px', threshold: 0 });
+  sections.forEach((section) => sectionObserver?.observe(section));
+}
 
-      // 2. Update Navbar Link
-      const id = entry.target.getAttribute('id');
-      if (id) {
-        // Query freshly rendered links
-        document.querySelectorAll('.nav-links a').forEach(link => {
-          link.classList.remove('active');
-          if (link.getAttribute('href') === `#${id}`) {
-            link.classList.add('active');
-          }
-        });
-      }
-    }
-  });
-}, observerOptions);
-
-document.querySelectorAll('section').forEach(section => {
-  observer.observe(section);
+const i18n = I18nService.getInstance();
+i18n.subscribe((language, translation) => {
+  document.documentElement.lang = language;
+  renderNavbar(navbarElement, translation, language);
+  renderHero(heroElement, translation);
+  renderServices(servicesElement, translation);
+  renderAbout(aboutElement, translation);
+  renderContact(contactElement, translation);
+  renderFooter(footerElement, translation);
+  initializePageMotion();
 });
