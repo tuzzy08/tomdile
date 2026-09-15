@@ -41,9 +41,9 @@ export function initNavbar(element: HTMLElement) {
 export function renderNavbar(element: HTMLElement, t: Translation, currentLang: string) {
   element.innerHTML = `
     <nav class="site-nav" aria-label="Primary navigation">
-      <a class="brand" href="#hero" aria-label="Tomdile home">
+      <a class="brand" href="#hero" aria-label="Letombor home">
         <span class="brand-mark" aria-hidden="true"><i></i><i></i></span>
-        <span>Tomdile.</span>
+        <span>Letombor.</span>
       </a>
 
       <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-label="${t.navbar.menu}">

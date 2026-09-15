@@ -6,9 +6,9 @@ export function renderFooter(element: HTMLElement, t: Translation) {
   element.innerHTML = `
     <div class="page-shell footer-main">
       <div class="footer-brand">
-        <a class="brand" href="#hero" aria-label="Tomdile home">
+        <a class="brand" href="#hero" aria-label="Letombor home">
           <span class="brand-mark" aria-hidden="true"><i></i><i></i></span>
-          <span>Tomdile.</span>
+          <span>Letombor.</span>
         </a>
         <p>${t.footer.slogan}</p>
         <div class="footer-status"><span></span>${t.footer.status}</div>
@@ -29,7 +29,7 @@ export function renderFooter(element: HTMLElement, t: Translation) {
       <div class="footer-column">
         <h2>${t.footer.connect}</h2>
         <a href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
-        <a href="mailto:contact@tomdile.com">contact@tomdile.com</a>
+        <a href="mailto:contact@letombor.com">contact@letombor.com</a>
       </div>
     </div>
 
@@ -39,6 +39,6 @@ export function renderFooter(element: HTMLElement, t: Translation) {
       <div class="footer-stream" aria-hidden="true">AGT.01 · TASK.RSK.07 · PAY.03 · SEC.ACTIVE · AGT.05 · FLOW.12</div>
     </div>
 
-    <div class="footer-wordmark" aria-hidden="true">Tomdile.</div>
+    <div class="footer-wordmark" aria-hidden="true">Letombor.</div>
   `;
 }

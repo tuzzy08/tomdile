@@ -14,7 +14,7 @@ export function renderContact(element: HTMLElement, t: Translation) {
           <p>${t.contact.subtitle}</p>
           <div class="contact-direct">
             <span>${t.contact.secondaryCta}</span>
-            <a href="mailto:contact@tomdile.com">contact@tomdile.com <i aria-hidden="true">↗</i></a>
+            <a href="mailto:contact@letombor.com">contact@letombor.com <i aria-hidden="true">↗</i></a>
           </div>
         </div>
 

@@ -97,7 +97,7 @@ export const de: Translation = {
       submit: 'Briefing senden',
       sending: 'Wird gesendet…',
       success: 'Ihr Briefing wurde gesendet. Wir melden uns.',
-      error: 'Das Briefing konnte nicht gesendet werden. Schreiben Sie an contact@tomdile.com.',
+      error: 'Das Briefing konnte nicht gesendet werden. Schreiben Sie an contact@letombor.com.',
     },
   },
   footer: {
@@ -110,6 +110,6 @@ export const de: Translation = {
     status: 'Systemstatus — betriebsbereit',
     privacy: 'Datenschutz',
     terms: 'Impressum',
-    rights: 'Tomdile. Alle Rechte vorbehalten.',
+    rights: 'Letombor. Alle Rechte vorbehalten.',
   },
 };

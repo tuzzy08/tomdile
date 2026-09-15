@@ -97,7 +97,7 @@ export const en: Translation = {
       submit: 'Send brief',
       sending: 'Sending…',
       success: 'Your brief has been sent. We’ll be in touch.',
-      error: 'We could not send your brief. Email contact@tomdile.com instead.',
+      error: 'We could not send your brief. Email contact@letombor.com instead.',
     },
   },
   footer: {
@@ -110,6 +110,6 @@ export const en: Translation = {
     status: 'System status — operational',
     privacy: 'Privacy',
     terms: 'Terms',
-    rights: 'Tomdile. All rights reserved.',
+    rights: 'Letombor. All rights reserved.',
   },
 };
