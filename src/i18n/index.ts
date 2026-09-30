@@ -6,7 +6,7 @@ type Language = 'en' | 'de';
 type Listener = (lang: Language, t: Translation) => void;
 
 export class I18nService {
-  private currentLang: Language = 'de';
+  private currentLang: Language = 'en';
   private listeners: Listener[] = [];
   
   // Singleton instance
