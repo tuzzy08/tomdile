@@ -30,6 +30,11 @@ export function renderFooter(element: HTMLElement, t: Translation) {
         <h2>${t.footer.connect}</h2>
         <a href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
         <a href="mailto:contact@letombor.com">contact@letombor.com</a>
+        <div class="footer-registration">
+          <p>letombor LLC</p>
+          <address>30 N Gould St Ste N<br>Sheridan, Wyoming 82801, USA</address>
+          <p>Registration No. 2026-002093681</p>
+        </div>
       </div>
     </div>
 
