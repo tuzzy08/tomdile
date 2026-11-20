@@ -2,72 +2,160 @@ import { Translation } from '../i18n/types';
 
 export function initHeroStyles() {}
 
-const agentLabels = ['DATA', 'RISK', 'COMPLIANCE', 'FRAUD', 'SUPPORT', 'ANALYTICS'];
-const railLabels = ['CARDS', 'BANKS', 'WALLETS', 'PAYOUTS', 'REMITTANCE', 'REAL-TIME'];
+const agents = ['Data', 'Risk', 'Compliance', 'Fraud', 'Support', 'Analytics'];
+const rails = ['Cards', 'Banks', 'Wallets', 'Payouts', 'Remittance', 'Real-time'];
+
+const ROWS = [96, 158, 220, 282, 344, 406];
+const CORE_X = 380;
+const CORE_Y = 251;
+const LEFT_PORT = 306;
+const RIGHT_PORT = 454;
+
+const logLines = [
+  ['AGT.RISK', 'score 0.12 · cleared'],
+  ['GATE.07', 'approval requested'],
+  ['PAY.SEPA', 'transfer settled'],
+  ['SEC.IAM', 'token scope verified'],
+  ['AGT.FRAUD', 'pattern check · pass'],
+  ['FX.EURNGN', 'quote locked · 30s'],
+  ['AGT.SUPPORT', 'case resolved'],
+  ['LEDGER', 'entries balanced'],
+];
+
+let logTimer: number | undefined;
+
+function chip(x: number, y: number, label: string, side: 'left' | 'right', index: number) {
+  const width = 132;
+  const left = side === 'left' ? x : x - width;
+  const dotX = side === 'left' ? left + 16 : left + width - 16;
+  const textX = side === 'left' ? left + 30 : left + width - 30;
+  const anchor = side === 'left' ? 'start' : 'end';
+  return `
+    <g class="hv-chip hv-chip-${side}" style="--i:${index}">
+      <rect x="${left}" y="${y - 16}" width="${width}" height="32" rx="7"></rect>
+      <circle class="hv-chip-dot" cx="${dotX}" cy="${y}" r="3"></circle>
+      <text x="${textX}" y="${y + 3.5}" text-anchor="${anchor}">${label.toUpperCase()}</text>
+    </g>
+  `;
+}
 
 function renderSystemVisual() {
-  const nodeY = [82, 148, 214, 280, 346, 412];
-  const agentNodes = nodeY.map((y, index) => `
-    <g class="system-node agent-node" style="--node-delay:${index * 120}ms">
-      <text x="18" y="${y + 4}">${agentLabels[index]}</text>
-      <circle cx="154" cy="${y}" r="17"></circle>
-      <circle class="node-core" cx="154" cy="${y}" r="4"></circle>
-      <path class="flow-line" d="M171 ${y} C248 ${y}, 278 ${250 + (index - 2.5) * 8}, 354 250"></path>
-    </g>
-  `).join('');
+  const spread = (index: number) => CORE_Y + (index - 2.5) * 9;
 
-  const railNodes = nodeY.map((y, index) => `
-    <g class="system-node rail-node" style="--node-delay:${index * 120 + 360}ms">
-      <path class="flow-line" d="M504 250 C566 ${250 + (index - 2.5) * 8}, 568 ${y}, 618 ${y}"></path>
-      <circle cx="636" cy="${y}" r="17"></circle>
-      <circle class="node-core" cx="636" cy="${y}" r="4"></circle>
-      <text x="666" y="${y + 4}">${railLabels[index]}</text>
-    </g>
-  `).join('');
+  const leftPaths = ROWS.map((y, i) => (
+    `<path id="hv-l${i}" class="hv-wire" pathLength="1" style="--i:${i}" d="M146 ${y} C 228 ${y}, 236 ${spread(i)}, ${LEFT_PORT} ${spread(i)}"></path>`
+  )).join('');
+
+  const rightPaths = ROWS.map((y, i) => (
+    `<path id="hv-r${i}" class="hv-wire" pathLength="1" style="--i:${i + 6}" d="M${RIGHT_PORT} ${spread(i)} C 524 ${spread(i)}, 532 ${y}, 614 ${y}"></path>`
+  )).join('');
+
+  const packets = ROWS.map((_, i) => {
+    const begin = (i * 0.53).toFixed(2);
+    const beginRight = (i * 0.53 + 1.9).toFixed(2);
+    return `
+      <g class="hv-packet">
+        <circle r="3.2">
+          <animateMotion dur="2.4s" begin="${begin}s" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines=".45 0 .25 1"><mpath href="#hv-l${i}"/></animateMotion>
+          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.12;.82;1" dur="2.4s" begin="${begin}s" repeatCount="indefinite"/>
+        </circle>
+      </g>
+      <g class="hv-packet">
+        <circle r="3.2">
+          <animateMotion dur="2.4s" begin="${beginRight}s" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines=".45 0 .25 1"><mpath href="#hv-r${i}"/></animateMotion>
+          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.12;.82;1" dur="2.4s" begin="${beginRight}s" repeatCount="indefinite"/>
+        </circle>
+      </g>
+    `;
+  }).join('');
 
   return `
-    <div class="system-visual" data-tilt aria-label="Diagram showing specialized AI agents flowing through a security core into financial rails">
-      <div class="visual-label visual-label-agents">Specialized agents</div>
-      <div class="visual-label visual-label-core">Security core</div>
-      <div class="visual-label visual-label-rails">Payment rails</div>
-      <svg viewBox="0 0 760 500" role="img" aria-hidden="true">
+    <div class="system-visual" data-tilt>
+      <svg viewBox="0 0 760 500" role="img" aria-labelledby="hv-title">
+        <title id="hv-title">Specialised AI agents route work through a security core onto payment rails</title>
         <defs>
-          <pattern id="hero-grid" width="28" height="28" patternUnits="userSpaceOnUse">
-            <path d="M28 0H0V28" fill="none" stroke="currentColor" stroke-opacity=".12" stroke-width="1" />
-          </pattern>
+          <radialGradient id="hv-glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#c8ff00" stop-opacity=".22"/>
+            <stop offset="100%" stop-color="#c8ff00" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="hv-sweep" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#c8ff00" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#c8ff00" stop-opacity=".9"/>
+          </linearGradient>
         </defs>
-        <rect class="svg-grid" width="760" height="500" fill="url(#hero-grid)"></rect>
-        ${agentNodes}
-        <g class="security-core">
-          <path d="M430 174 L504 216 L504 300 L430 342 L356 300 L356 216 Z"></path>
-          <path d="M430 196 L484 227 L484 289 L430 320 L376 289 L376 227 Z"></path>
-          <path d="M430 220 L464 239 L464 278 L430 298 L396 278 L396 239 Z"></path>
-          <circle cx="430" cy="258" r="9"></circle>
-          <path class="core-lock" d="M424 254v-7a6 6 0 0 1 12 0v7m-15 0h18v16h-18z"></path>
+
+        <g class="hv-heads">
+          <text x="14" y="44">AGENTS / 06</text>
+          <text x="${CORE_X}" y="44" text-anchor="middle">SECURITY CORE</text>
+          <text x="746" y="44" text-anchor="end" class="is-accent">RAILS / 06</text>
+          <path d="M14 58H146M${LEFT_PORT} 58H${RIGHT_PORT}M614 58H746"></path>
         </g>
-        <circle class="junction" cx="354" cy="250" r="5"></circle>
-        <circle class="junction" cx="504" cy="250" r="5"></circle>
-        ${railNodes}
+
+        <circle cx="${CORE_X}" cy="${CORE_Y}" r="150" fill="url(#hv-glow)"></circle>
+
+        <g class="hv-wires">${leftPaths}${rightPaths}</g>
+
+        ${ROWS.map((y, i) => chip(14, y, agents[i], 'left', i)).join('')}
+        ${ROWS.map((y, i) => chip(746, y, rails[i], 'right', i)).join('')}
+
+        <g class="hv-core">
+          <rect class="hv-core-frame" x="${LEFT_PORT}" y="${CORE_Y - 74}" width="148" height="148" rx="28"></rect>
+          <rect class="hv-core-inner" x="${LEFT_PORT + 18}" y="${CORE_Y - 56}" width="112" height="112" rx="20"></rect>
+          <g class="hv-core-spin">
+            <circle cx="${CORE_X}" cy="${CORE_Y}" r="44" class="hv-core-ring"></circle>
+            <path d="M${CORE_X} ${CORE_Y - 44} A44 44 0 0 1 ${CORE_X + 44} ${CORE_Y}" class="hv-core-arc"></path>
+          </g>
+          <circle class="hv-core-pulse" cx="${CORE_X}" cy="${CORE_Y}" r="26"></circle>
+          <circle class="hv-core-disc" cx="${CORE_X}" cy="${CORE_Y}" r="24"></circle>
+          <path class="hv-core-lock" d="M${CORE_X - 7} ${CORE_Y - 2}v-5a7 7 0 0 1 14 0v5M${CORE_X - 10} ${CORE_Y - 2}h20v13h-20z"></path>
+          <circle class="hv-port" cx="${LEFT_PORT}" cy="${CORE_Y}" r="4"></circle>
+          <circle class="hv-port" cx="${RIGHT_PORT}" cy="${CORE_Y}" r="4"></circle>
+        </g>
+
+        <g class="hv-packets">${packets}</g>
       </svg>
-      <div class="visual-corner visual-corner-top"></div>
-      <div class="visual-corner visual-corner-bottom"></div>
+
+      <div class="hv-log" aria-hidden="true">
+        <div class="hv-log-head"><span></span>Event stream</div>
+        <ol class="hv-log-list"></ol>
+      </div>
     </div>
   `;
 }
 
+function formatTime(date: Date) {
+  return date.toTimeString().slice(0, 8);
+}
+
+function startEventLog(list: HTMLOListElement, animate: boolean) {
+  window.clearInterval(logTimer);
+  let cursor = 0;
+  const push = () => {
+    const [source, message] = logLines[cursor % logLines.length];
+    cursor += 1;
+    const item = document.createElement('li');
+    item.innerHTML = `<time>${formatTime(new Date())}</time><b>${source}</b><span>${message}</span>`;
+    list.prepend(item);
+    while (list.children.length > 3) list.lastElementChild?.remove();
+  };
+  push(); push(); push();
+  if (animate) logTimer = window.setInterval(push, 2400);
+}
+
 export function renderHero(element: HTMLElement, t: Translation) {
+  const lines = t.hero.title;
   element.innerHTML = `
-    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-backdrop" aria-hidden="true"></div>
     <div class="hero-inner page-shell">
       <div class="hero-copy">
-        <p class="eyebrow"><span></span>${t.hero.eyebrow}</p>
+        <p class="eyebrow hero-enter" style="--d:0"><span></span>${t.hero.eyebrow}</p>
         <h1 class="hero-title">
-          ${t.hero.title.map((line) => `<span>${line}</span>`).join('')}
-          <i class="hero-reveal-block reveal-a" aria-hidden="true"></i>
-          <i class="hero-reveal-block reveal-b" aria-hidden="true"></i>
+          ${lines.map((line, index) => `
+            <span class="hero-line"><span style="--d:${index + 1}" class="${index === lines.length - 1 ? 'is-accent' : ''}">${line}</span></span>
+          `).join('')}
         </h1>
-        <p class="hero-subtitle">${t.hero.subtitle}</p>
-        <div class="hero-actions">
+        <p class="hero-subtitle hero-enter" style="--d:4">${t.hero.subtitle}</p>
+        <div class="hero-actions hero-enter" style="--d:5">
           <a class="button button-accent" href="#contact">${t.hero.ctaPrimary}<span aria-hidden="true">↗</span></a>
           <a class="text-link" href="#capabilities">${t.hero.ctaSecondary}<span aria-hidden="true">→</span></a>
         </div>
@@ -76,32 +164,41 @@ export function renderHero(element: HTMLElement, t: Translation) {
       ${renderSystemVisual()}
     </div>
 
-    <div class="telemetry" aria-label="Live system indicators">
-      <div class="telemetry-live"><span></span>LIVE</div>
+    <div class="telemetry page-shell" aria-label="System indicators">
+      <div class="telemetry-live"><span></span>Live</div>
       ${t.hero.status.map((label, index) => `
         <div class="telemetry-item">
           <span>${label}</span>
-          <strong>${index === 4 ? 'ACTIVE' : index === 0 ? 'LIVE' : '03'}</strong>
+          <strong>${t.hero.statusValues[index] ?? ''}</strong>
         </div>
       `).join('')}
-      <div class="telemetry-progress"><strong>01</strong><i></i><span>04</span></div>
+      <a class="telemetry-scroll" href="#capabilities" aria-label="${t.hero.ctaSecondary}"><i></i></a>
     </div>
   `;
 
-  const visual = element.querySelector<HTMLElement>('[data-tilt]');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const visual = element.querySelector<HTMLElement>('[data-tilt]');
+  const svg = visual?.querySelector('svg');
+  const log = element.querySelector<HTMLOListElement>('.hv-log-list');
 
-  if (visual && !reduceMotion) {
+  if (log) startEventLog(log, !reduceMotion);
+  if (reduceMotion) svg?.pauseAnimations();
+
+  if (visual && !reduceMotion && !element.dataset.tiltBound) {
+    element.dataset.tiltBound = 'true';
     element.addEventListener('pointermove', (event) => {
+      const target = element.querySelector<HTMLElement>('[data-tilt]');
+      if (!target) return;
       const rect = element.getBoundingClientRect();
       const x = (event.clientX - rect.left) / rect.width - 0.5;
       const y = (event.clientY - rect.top) / rect.height - 0.5;
-      visual.style.setProperty('--tilt-x', `${x * 8}px`);
-      visual.style.setProperty('--tilt-y', `${y * 6}px`);
+      target.style.setProperty('--tilt-x', `${x * 10}px`);
+      target.style.setProperty('--tilt-y', `${y * 8}px`);
     });
     element.addEventListener('pointerleave', () => {
-      visual.style.setProperty('--tilt-x', '0px');
-      visual.style.setProperty('--tilt-y', '0px');
+      const target = element.querySelector<HTMLElement>('[data-tilt]');
+      target?.style.setProperty('--tilt-x', '0px');
+      target?.style.setProperty('--tilt-y', '0px');
     });
   }
 }

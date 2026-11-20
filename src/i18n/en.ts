@@ -16,6 +16,7 @@ export const en: Translation = {
     ctaPrimary: 'Start a build',
     ctaSecondary: 'Explore capabilities',
     status: ['Agents online', 'Approval queue', 'Threats blocked', 'Transactions', 'System status'],
+    statusValues: ['Online', 'Gated', 'Filtered', 'Reconciled', 'Operational'],
   },
   capabilities: {
     kicker: 'Capabilities / 01—03',

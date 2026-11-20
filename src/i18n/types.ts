@@ -14,6 +14,7 @@ export interface Translation {
     ctaPrimary: string;
     ctaSecondary: string;
     status: string[];
+    statusValues: string[];
   };
   capabilities: {
     kicker: string;

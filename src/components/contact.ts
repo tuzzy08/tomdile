@@ -1,6 +1,5 @@
 import { Translation } from '../i18n/types';
 import { EmailService } from '../services/email';
-import { renderCheckerBoundary } from './checker-boundary';
 
 export function initContactStyles() {}
 
@@ -38,7 +37,6 @@ export function renderContact(element: HTMLElement, t: Translation) {
         </form>
       </div>
     </section>
-    ${renderCheckerBoundary('lime', 'dark')}
   `;
 
   const form = element.querySelector<HTMLFormElement>('#contact-form');

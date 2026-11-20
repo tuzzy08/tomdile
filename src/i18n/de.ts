@@ -16,6 +16,7 @@ export const de: Translation = {
     ctaPrimary: 'Projekt starten',
     ctaSecondary: 'Kompetenzen entdecken',
     status: ['Agenten online', 'Freigaben', 'Bedrohungen blockiert', 'Transaktionen', 'Systemstatus'],
+    statusValues: ['Online', 'Geprüft', 'Gefiltert', 'Abgeglichen', 'Betriebsbereit'],
   },
   capabilities: {
     kicker: 'Kompetenzen / 01—03',
